@@ -1,0 +1,4 @@
+interface:
+  display_name: "Setup vLLM Ascend Dev"
+  short_description: "Automate editable vLLM Ascend development setup"
+  default_prompt: "Use $setup-vllm-ascend-dev to install or repair the verified editable vLLM and vLLM Ascend development environment."
