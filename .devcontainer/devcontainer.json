@@ -1,0 +1,42 @@
+{
+    "name": "vllm-ascend-dev",
+    "image": "vllm-ascend:dev-26.1.0.cann9.1.0.day20260730-800I-A3-py311-Ubuntu24.04-lts-aarch64",
+    "runArgs": [
+        "--net=host",
+        "--shm-size=1g",
+        "--privileged",
+        "--env-file",
+        ".devcontainer/.env"
+    ],
+    "mounts": [
+        "type=bind,source=/usr/local/dcmi,target=/usr/local/dcmi",
+        "type=bind,source=/usr/local/Ascend/driver/tools/hccn_tool,target=/usr/local/Ascend/driver/tools/hccn_tool",
+        "type=bind,source=/usr/local/bin/npu-smi,target=/usr/local/bin/npu-smi",
+        "type=bind,source=/usr/local/Ascend/driver/lib64,target=/usr/local/Ascend/driver/lib64",
+        "type=bind,source=/usr/local/Ascend/driver/version.info,target=/usr/local/Ascend/driver/version.info",
+        "type=bind,source=/etc/ascend_install.info,target=/etc/ascend_install.info",
+        "type=bind,source=/root/.cache,target=/root/.cache",
+        // 权重文件挂载
+        "type=bind,source=/mnt,target=/mnt"
+    ],
+    "remoteEnv": {
+        "http_proxy": "${containerEnv:devcontainer_proxy}",
+        "https_proxy": "${containerEnv:devcontainer_proxy}",
+        "HTTP_PROXY": "${containerEnv:devcontainer_proxy}",
+        "HTTPS_PROXY": "${containerEnv:devcontainer_proxy}",
+        "no_proxy": "wo.hicloud.com,wo-dr*.dbankcloud.ru,wo-dr*.dbankcloud.cn,his.chaspark.com,7.*,172.32.*,172.31.*,172.30.*,172.29.*,172.28.*,172.27.*,172.26.*,172.25.*,172.24.*,172.23.*,172.22.*,172.21.*,172.20.*,172.19.*,172.18.*,172.17.*,172.16.*,127.0.0.1*,100.9*,100.8*,100.7*,100.69.*,100.68.*,100.67.*,100.66.*,100.65.*,100.64.*,100.126.*,100.125.*,100.124.*,100.123.*,100.122.*,100.121.*,100.120.*,100.11*,100.10*,10.*,*tool.chaspark.net,*papers.chaspark.com,*paper.chaspark.com,*irad.huaweigsc.com,*heds.huaweigsc.com,*cn-north-6.myhuaweicloud.com,*cn-north-5.myhuaweicloud.com,*cn-north-5-console.huaweicloud.com,*acm.chaspark.com,*.yw-partners.com,*.yw-beta.com,*.yinwang.com,*.pinjiantrip.com,*.inhuawei.com,*.hwtrip.*,*.hwtelcloud.com,*.hwht.*,*.hw3static.com,*.hw3static.cn,*.huaweistatic.com,*.huaweistatic.cn,*.huaweimossel.*,*.huaweimarine.com,*.huawei.com,*.huawei.cn,*.hisilicon.cn,*.hisilicon.*,*.hic.cloud,*.chaspark.net,*.chaspark.com,*.chaspark.cn,*.athuawei.com,*-dev.myhuaweicloud.com,*-dev.huaweicloud.com,<local>",
+        "NO_PROXY": "wo.hicloud.com,wo-dr*.dbankcloud.ru,wo-dr*.dbankcloud.cn,his.chaspark.com,7.*,172.32.*,172.31.*,172.30.*,172.29.*,172.28.*,172.27.*,172.26.*,172.25.*,172.24.*,172.23.*,172.22.*,172.21.*,172.20.*,172.19.*,172.18.*,172.17.*,172.16.*,127.0.0.1*,100.9*,100.8*,100.7*,100.69.*,100.68.*,100.67.*,100.66.*,100.65.*,100.64.*,100.126.*,100.125.*,100.124.*,100.123.*,100.122.*,100.121.*,100.120.*,100.11*,100.10*,10.*,*tool.chaspark.net,*papers.chaspark.com,*paper.chaspark.com,*irad.huaweigsc.com,*heds.huaweigsc.com,*cn-north-6.myhuaweicloud.com,*cn-north-5.myhuaweicloud.com,*cn-north-5-console.huaweicloud.com,*acm.chaspark.com,*.yw-partners.com,*.yw-beta.com,*.yinwang.com,*.pinjiantrip.com,*.inhuawei.com,*.hwtrip.*,*.hwtelcloud.com,*.hwht.*,*.hw3static.com,*.hw3static.cn,*.huaweistatic.com,*.huaweistatic.cn,*.huaweimossel.*,*.huaweimarine.com,*.huawei.com,*.huawei.cn,*.hisilicon.cn,*.hisilicon.*,*.hic.cloud,*.chaspark.net,*.chaspark.com,*.chaspark.cn,*.athuawei.com,*-dev.myhuaweicloud.com,*-dev.huaweicloud.com,<local>"
+    },
+    "postCreateCommand": "bash .devcontainer/post-create.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "openai.chatgpt",
+                "Anthropic.claude-code",
+                "ms-python.python",
+                "charliermarsh.ruff",
+                "eamodio.gitlens"
+            ]
+        }
+    }
+}
